@@ -14,7 +14,12 @@ async function createAuction(event, context) {
     createdAt: now.toISOString(),
   };
 
-  await dynamoDB.put({ TableName: "AuctionsTable", Item: auction }).promise();
+  await dynamoDB
+    .put({
+      TableName: process.env.AUCTIONS_TABLE_NAME,
+      Item: auction,
+    })
+    .promise();
 
   return {
     statusCode: 201,
